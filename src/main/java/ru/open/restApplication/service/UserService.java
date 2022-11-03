@@ -1,6 +1,9 @@
 package ru.open.restApplication.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import ru.open.restApplication.criteria.UserCriteria;
 import ru.open.restApplication.response.ChangeUserStatusResponse;
 import ru.open.restApplication.entity.User;
 import ru.open.restApplication.repository.UserRepository;
@@ -9,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +43,17 @@ public class UserService {
         userRepository.save(user);
 
         return statusResponse;
+    }
+
+    public List<User> list(UserCriteria criteria) {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> get(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public User create(User user) {
+        return userRepository.save(user);
     }
 }
