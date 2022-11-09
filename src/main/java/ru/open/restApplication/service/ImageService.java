@@ -13,7 +13,7 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class ImageService {
-    public String store(MultipartFile file, String path) throws IOException {
+    public String store(MultipartFile file, String path) throws EmptyFileException, IOException {
         String originalFilename = file.getOriginalFilename();
         if (originalFilename.isEmpty()) {
             throw new EmptyFileException();
